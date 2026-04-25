@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -266,7 +266,6 @@
       </div>
     </div>
   </div>
-
   <!-- Graphique des températures -->
   <div class="card graph-card">
     <h3><i class="fas fa-temperature-high"></i> Évolution des températures (5 jours)</h3>
@@ -572,4 +571,3 @@
 </script>
 </body>
 </html>
-```
