@@ -1,6 +1,4 @@
-Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigilance et prévisions.
-```html
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -20,19 +18,16 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       box-sizing: border-box;
       font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
-
     body {
       background: linear-gradient(145deg, #e0eafc 0%, #cfdef3 100%);
       padding: 20px;
       min-height: 100vh;
     }
-
     /* Conteneur principal */
     .container {
       max-width: 1400px;
       margin: 0 auto;
     }
-
     /* header */
     .header {
       display: flex;
@@ -85,7 +80,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       background: #0b5e8a;
       transform: scale(0.97);
     }
-
     /* Grille principale */
     .grid {
       display: grid;
@@ -93,7 +87,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       gap: 25px;
       margin-bottom: 30px;
     }
-
     /* Cartes génériques */
     .card {
       background: rgba(255,255,255,0.85);
@@ -103,7 +96,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       transition: all 0.2s;
     }
-
     /* Carte vigilance */
     .vigilance-header {
       display: flex;
@@ -145,7 +137,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       margin-top: 12px;
       font-size: 0.85rem;
     }
-
     /* infos météo courantes */
     .meteo-actuelle {
       display: flex;
@@ -186,7 +177,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       margin: 8px 0;
       display: block;
     }
-
     /* Graphique températures */
     .graph-card {
       margin-top: 25px;
@@ -195,14 +185,12 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
       max-height: 220px;
       width: 100%;
     }
-
     footer {
       text-align: center;
       margin-top: 30px;
       color: #2c3e66;
       font-size: 0.8rem;
     }
-
     @media (max-width: 800px) {
       .grid {
         grid-template-columns: 1fr;
@@ -212,7 +200,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
         gap: 12px;
       }
     }
-
     /* Chargement */
     .loader {
       text-align: center;
@@ -254,7 +241,6 @@ Voici un code HTML/CSS/JS complet pour créer un site météo avec carte de vigi
         ⚠️ Aucune vigilance particulière pour le moment.
       </div>
     </div>
-
     <!-- Colonne droite : météo détaillée et prévisions -->
     <div class="card">
       <div id="currentWeatherDisplay">
