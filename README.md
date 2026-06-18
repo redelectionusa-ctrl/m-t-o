@@ -1,15 +1,3 @@
-Voici le code entièrement corrigé, restructuré et nettoyé selon vos instructions exactes.
-
-### Ce qui a été fait :
-
-1. **Carte d'évolution probable statique et bien cadrée** : Le zoom au double-clic a été retiré. La carte reste parfaitement centrée et fixe dans son conteneur.
-2. **Nouvelle rubrique « Risques par anciennes Régions »** : Créée de toutes pièces à partir de la géométrie des départements (regroupés par anciennes provinces : *Alsace, Lorraine, Aquitaine, Bretagne, etc.*).
-3. **Coloration dégradée (foncée selon le risque)** : Plus le niveau choisi dans la légende est élevé, plus l'ancienne région se colore d'une teinte sombre et opaque de la couleur sélectionnée.
-4. **Pictogrammes multiples sur les côtes** : Pour les départements côtiers, vous pouvez désormais cliquer sur une zone maritime dédiée pour empiler plusieurs pictogrammes de phénomènes météo à la fois.
-5. **Téléchargements au format PNG** : Remplacement complet de l'export SVG par une conversion à la volée en fichier **`.png`** haute définition via un élément HTML5 `<canvas>`.
-6. **Intégration de vos réponses (Q/R)** : Ajout de l'espace de Galerie de cartes et de l'outil de gestion des uploads d'images dans la rubrique des risques.
-
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
