@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Vigilance Météo France - Pro</title>
+<title>Vigilance Météo France Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -16,114 +16,106 @@
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
 .page{display:flex;flex-direction:column;gap:12px;padding:12px;max-width:1400px;margin:0 auto}
 
+/* Header */
 .app-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--surf);border:1px solid var(--b1);border-radius:var(--r)}
 .app-title{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px rgba(77,124,254,.6)}
-.view-tabs{display:flex;gap:4px;align-items:center}
-.vtab{padding:5px 13px;border:1px solid var(--b2);border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;background:transparent;color:var(--t2);transition:all .18s;font-weight:500}
-.vtab:hover{background:var(--surf2);color:var(--t1)}
-.vtab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.day-tabs{display:flex;gap:4px}
+.dtab{padding:5px 14px;border:1px solid var(--b2);border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;background:transparent;color:var(--t2);transition:all .18s;font-weight:500}
+.dtab:hover{background:var(--surf2);color:var(--t1)}
+.dtab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 
+/* Layout */
 .top{display:flex;gap:12px;align-items:flex-start}
-.map-col{flex:1;min-width:0;position:relative}
-.map-container{width:100%;aspect-ratio:1/1.04;border-radius:12px;overflow:hidden;background:#1a1d27;border:1px solid var(--b1);position:relative}
-.map-container svg{display:block;width:100%;height:100%}
+#map-col{flex:1;min-width:0;position:relative;height:624px;background:#131823;border-radius:12px;border:1px solid var(--b1);overflow:hidden}
 .sb{width:220px;flex-shrink:0;display:flex;flex-direction:column;gap:8px}
 .card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:12px}
 .stitle{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:8px}
 
-.lvl-btn, .prob-level-btn{display:flex;align-items:center;gap:7px;width:100%;padding:6px 8px;margin-bottom:3px;border:1px solid transparent;border-radius:var(--rs);cursor:pointer;background:transparent;font-size:12px;font-family:inherit;color:var(--t2);text-align:left;transition:all .12s}
-.lvl-btn:hover, .prob-level-btn:hover{background:var(--surf2);color:var(--t1)}
-.lvl-btn.on, .prob-level-btn.on{border-color:var(--b2);background:var(--surf2);color:var(--t1)}
+/* Level rows */
+.lvl-row-wrap{display:flex;align-items:center;gap:3px;margin-bottom:2px}
+.lvl-btn{display:flex;align-items:center;gap:7px;flex:1;padding:5px 7px;border:1px solid transparent;border-radius:var(--rs);cursor:pointer;background:transparent;font-size:12px;font-family:inherit;color:var(--t2);text-align:left;transition:all .12s}
+.lvl-btn:hover{background:var(--surf2);color:var(--t1)}
+.lvl-btn.on{border-color:var(--b2);background:var(--surf2);color:var(--t1)}
 .lvl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
 
+/* Vue selector */
+.view-tabs{display:flex;gap:4px;align-items:center}
+.vtab{padding:5px 13px;border:1px solid var(--b2);border-radius:20px;cursor:pointer;font-size:12px;font-family:inherit;background:transparent;color:var(--t2);transition:all .18s;font-weight:500}
+.vtab:hover{background:var(--surf2);color:var(--t1)}
+.vtab.on{background:#2a1f3d;color:#c084fc;border-color:#7c3aed}
+.vtab-sep{width:1px;height:16px;background:var(--b2);margin:0 4px}
+
+/* Picto grid */
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
-.pbtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;border:1px solid transparent;border-radius:var(--rs);cursor:pointer;background:transparent;transition:all .12s;font-size:9px;color:var(--t3)}
+.pbtn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;border:1px solid transparent;border-radius:var(--rs);cursor:pointer;background:transparent;transition:all .12s;font-size:9px;color:var(--t3);font-family:inherit}
 .pbtn:hover{background:var(--surf2);color:var(--t2)}
 .pbtn.on{border-color:var(--acc);background:rgba(77,124,254,.1);color:var(--acc)}
-.pbtn img{width:22px;height:22px;object-fit:contain}
+.pbtn img{width:22px;height:22px;display:block}
 
 .act-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:8px;border:1px solid var(--b2);border-radius:var(--rs);cursor:pointer;background:transparent;font-size:12px;font-family:inherit;color:var(--t2);transition:all .12s;font-weight:500}
 .act-btn:hover{background:var(--surf2);color:var(--t1)}
 .act-btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
-.act-btn.primary:hover{background:#3d6de8}
 
 .tip{position:absolute;background:var(--surf);border:1px solid var(--b2);border-radius:8px;padding:5px 11px;font-size:11px;color:var(--t1);pointer-events:none;display:none;z-index:10;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.5)}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(100px, 1fr));gap:8px;margin-top:8px}
-.gallery-item{border:1px solid var(--b1);border-radius:6px;overflow:hidden;background:#13151f;position:relative;aspect-ratio:1}
-.gallery-item img{width:100%;height:100%;object-fit:cover}
-.upload-zone{border:2px dashed var(--b2);border-radius:var(--rs);padding:14px;text-align:center;font-size:11px;color:var(--t3);cursor:pointer;transition:all .15s}
-.upload-zone:hover{border-color:var(--acc);color:var(--t2)}
+
+/* Rubrique Espace Cartes de Risque */
+.risk-section{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:16px;margin-top:10px;display:flex;flex-direction:column;gap:12px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));gap:10px;margin-top:8px}
+.gallery-item{background:var(--surf2);border:1px solid var(--b1);border-radius:var(--rs);padding:6px;text-align:center;position:relative}
+.gallery-item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;background:#131823;margin-bottom:4px}
+.gallery-item span{font-size:11px;color:var(--t2);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-box {border:2px dashed var(--b2);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;color:var(--t2);font-size:12px}
+.upload-box:hover {border-color:var(--acc);color:var(--t1)}
 </style>
 </head>
 <body>
 <div class="page">
 
   <div class="app-hdr">
-    <div class="app-title"><span class="dot"></span>Outil Cartographique Vigilance</div>
-    <div class="view-tabs">
-      <button class="vtab on" id="tab-vigil" onclick="switchView('vigilance')">Vigilance Départements</button>
-      <button class="vtab" id="tab-prob" onclick="switchView('probable')">Évolution probable (Fixe)</button>
-      <button class="vtab" id="tab-regions" onclick="switchView('regions')">Risque anciennes Régions</button>
+    <div class="app-title"><span class="dot"></span>Système Vigilance & Risques Météo</div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="view-tabs">
+        <button class="vtab on" id="vtab-vigil" onclick="setView('vigilance')">Vigilance</button>
+        <span class="vtab-sep"></span>
+        <button class="vtab" id="vtab-prob" onclick="setView('probable')">↗ Évolution probable</button>
+        <span class="vtab-sep"></span>
+        <button class="vtab" id="vtab-reg" onclick="setView('regions')">🗺️ Anciennes Régions</button>
+      </div>
+      
+      <div class="day-tabs" id="day-tabs-wrap">
+        <button class="dtab on" id="dtab-today" onclick="setDay('today')">Aujourd'hui</button>
+        <button class="dtab" id="dtab-tomorrow" onclick="setDay('tomorrow')">Demain</button>
+      </div>
     </div>
   </div>
 
-  <div class="top" id="view-vigilance">
-    <div class="map-col">
-      <div class="map-container" id="map-dept-box"></div>
-      <div class="tip" id="tip-dept"></div>
+  <div class="top">
+    <div id="map-col">
+      <div id="map" style="width:100%;height:100%"></div>
+      <div class="tip" id="tip"></div>
     </div>
-    <div class="sb">
-      <div class="card">
-        <p class="stitle">Niveau de vigilance</p>
-        <div id="lvl-container"></div>
+
+    <div class="sb" id="sidebar-controls">
       </div>
-      <div class="card">
-        <p class="stitle">Phénomène</p>
-        <div class="pgrid" id="pgrid-dept"></div>
-      </div>
-      <button class="act-btn primary" onclick="exportToPNG('map-dept-box', 'vigilance-departements.png')">↓ Télécharger en PNG</button>
-    </div>
   </div>
 
-  <div class="top" id="view-probable" style="display:none">
-    <div class="map-col">
-      <div class="map-container" id="map-prob-box"></div>
-      <div class="tip" id="tip-prob"></div>
-    </div>
-    <div class="sb">
-      <div class="card">
-        <p class="stitle">Passage Supérieur Possible</p>
-        <div id="prob-lvl-container"></div>
+  <div class="risk-section">
+    <div style="display:flex;justify-content:between;align-items:center">
+      <div>
+        <h3 style="font-size:14px;font-weight:600">📁 Espace « Cartes de Risque »</h3>
+        <p style="font-size:11px;color:var(--t2)">Uploadez vos propres cartes ou enregistrez vos configurations saisies.</p>
       </div>
-      <button class="act-btn primary" onclick="exportToPNG('map-prob-box', 'evolution-probable.png')">↓ Télécharger en PNG</button>
     </div>
-  </div>
+    
+    <div class="upload-box" onclick="document.getElementById('map-uploader').click()">
+      Insérer / Glisser une carte météo (Fichier Image)...
+      <input type="file" id="map-uploader" accept="image/*" style="display:none" onchange="importCustomMap(event)">
+    </div>
 
-  <div class="top" id="view-regions" style="display:none">
-    <div class="map-col">
-      <div class="map-container" id="map-regions-box"></div>
-      <div class="tip" id="tip-regions"></div>
-    </div>
-    <div class="sb">
-      <div class="card">
-        <p class="stitle">Intensité du risque</p>
-        <div id="reg-lvl-container"></div>
-      </div>
-      <div class="card">
-        <p class="stitle">Multi-Phénomènes Côtes</p>
-        <div class="pgrid" id="pgrid-coastal"></div>
-      </div>
-      <div class="card">
-        <p class="stitle">Espace d'upload de cartes</p>
-        <div class="upload-zone" onclick="document.getElementById('file-loader').click()">
-          Déposer ou cliquer pour uploader vos cartes
-          <input type="file" id="file-loader" style="display:none" accept="image/*" onchange="handleUpload(this)">
-        </div>
-        <p class="stitle" style="margin-top:12px; margin-bottom:4px">Galerie générée</p>
-        <div class="gallery-grid" id="gallery"></div>
-      </div>
-      <button class="act-btn primary" onclick="exportToPNG('map-regions-box', 'risque-anciennes-regions.png')">↓ Télécharger en PNG</button>
+    <div>
+      <p class="stitle">Galerie des cartes enregistrées</p>
+      <div class="gallery-grid" id="risk-gallery"></div>
     </div>
   </div>
 
@@ -133,302 +125,315 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
 const PICTOS = {
-  vent: 'https://i.imgur.com/w9U4uxl.png',
-  orage: 'https://i.imgur.com/TqMfDUO.png',
-  pluies: 'https://i.imgur.com/doeHp1Y.png',
-  inondation: 'https://i.imgur.com/b6bctj5.png',
-  neige: 'https://i.imgur.com/g0IsPe2.png',
-  verglas: 'https://i.imgur.com/EJKnm3Q.png',
-  vagues: 'https://i.imgur.com/u5zMvyy.png'
+  vent: 'https://i.imgur.com/w9U4uxl.png', orage: 'https://i.imgur.com/TqMfDUO.png',
+  pluies: 'https://i.imgur.com/doeHp1Y.png', inondation: 'https://i.imgur.com/b6bctj5.png',
+  neige: 'https://i.imgur.com/g0IsPe2.png', verglas: 'https://i.imgur.com/EJKnm3Q.png',
+  froid: 'https://i.imgur.com/nCPwfFD.png', chaleur: 'https://i.imgur.com/EGeV2X0.png',
+  vagues: 'https://i.imgur.com/u5zMvyy.png', avalanches: 'https://i.imgur.com/KZQXNzU.png'
 };
 
 const LEVELS = {
-  vert: { color: '#31AA35', label: 'Risque Faible' },
-  jaune: { color: '#FFF600', label: 'Risque Modéré' },
-  orange: { color: '#FFB82B', label: 'Risque Élevé' },
-  rouge: { color: '#CC0000', label: 'Risque Très Élevé' }
+  vert: { color: '#31AA35', label: 'Vert' },
+  jaune: { color: '#FFF600', label: 'Jaune' },
+  orange: { color: '#FFB82B', label: 'Orange' },
+  rouge: { color: '#CC0000', label: 'Rouge' }
 };
 
-// Tableau de correspondance départements -> anciennes régions historiques
+// Association des départements aux anciennes régions françaises
 const DEPT_TO_OLD_REG = {
-  "67":"Alsace","68":"Alsace",
-  "24":"Aquitaine","33":"Aquitaine","40":"Aquitaine","47":"Aquitaine","64":"Aquitaine",
-  "03":"Auvergne","15":"Auvergne","43":"Auvergne","63":"Auvergne",
-  "14":"Basse-Normandie","50":"Basse-Normandie","61":"Basse-Normandie",
-  "21":"Bourgogne","58":"Bourgogne","71":"Bourgogne","89":"Bourgogne",
-  "22":"Bretagne","29":"Bretagne","35":"Bretagne","56":"Bretagne",
-  "18":"Centre","28":"Centre","36":"Centre","37":"Centre","41":"Centre","45":"Centre",
-  "08":"Champagne-Ardenne","10":"Champagne-Ardenne","51":"Champagne-Ardenne","52":"Champagne-Ardenne",
-  "2A":"Corse","2B":"Corse",
-  "25":"Franche-Comté","39":"Franche-Comté","70":"Franche-Comté","90":"Franche-Comté",
-  "27":"Haute-Normandie","76":"Haute-Normandie",
-  "75":"Île-de-France","77":"Île-de-France","78":"Île-de-France","91":"Île-de-France","92":"Île-de-France","93":"Île-de-France","94":"Île-de-France","95":"Île-de-France",
-  "11":"Languedoc-Roussillon","30":"Languedoc-Roussillon","34":"Languedoc-Roussillon","48":"Languedoc-Roussillon","66":"Languedoc-Roussillon",
-  "19":"Limousin","23":"Limousin","87":"Limousin",
-  "54":"Lorraine","55":"Lorraine","57":"Lorraine","88":"Lorraine",
-  "09":"Midi-Pyrénées","12":"Midi-Pyrénées","31":"Midi-Pyrénées","32":"Midi-Pyrénées","46":"Midi-Pyrénées","65":"Midi-Pyrénées","81":"Midi-Pyrénées","82":"Midi-Pyrénées",
-  "59":"Nord-Pas-de-Calais","62":"Nord-Pas-de-Calais",
-  "44":"Pays de la Loire","49":"Pays de la Loire","53":"Pays de la Loire","72":"Pays de la Loire","85":"Pays de la Loire",
-  "02":"Picardie","60":"Picardie","80":"Picardie",
-  "16":"Poitou-Charentes","17":"Poitou-Charentes","79":"Poitou-Charentes","86":"Poitou-Charentes",
-  "04":"PACA","05":"PACA","06":"PACA","13":"PACA","83":"PACA","84":"PACA",
-  "01":"Rhône-Alpes","07":"Rhône-Alpes","26":"Rhône-Alpes","38":"Rhône-Alpes","42":"Rhône-Alpes","69":"Rhône-Alpes","73":"Rhône-Alpes","74":"Rhône-Alpes"
+  "Bas-Rhin":"Alsace","Haut-Rhin":"Alsace",
+  "Meuse":"Lorraine","Meurthe-et-Moselle":"Lorraine","Moselle":"Lorraine","Vosges":"Lorraine",
+  "Finistère":"Bretagne","Côtes-d'Armor":"Bretagne","Ille-et-Vilaine":"Bretagne","Morbihan":"Bretagne",
+  "Gironde":"Aquitaine","Dordogne":"Aquitaine","Landes":"Aquitaine","Lot-et-Garonne":"Aquitaine","Pyrénées-Atlantiques":"Aquitaine",
+  "Nord":"Nord-Pas-de-Calais","Pas-de-Calais":"Nord-Pas-de-Calais",
+  "Seine-Maritime":"Haute-Normandie","Eure":"Haute-Normandie",
+  "Calvados":"Basse-Normandie","Manche":"Basse-Normandie","Orne":"Basse-Normandie",
+  "Loire-Atlantique":"Pays de la Loire","Vendée":"Pays de la Loire","Maine-et-Loire":"Pays de la Loire","Mayenne":"Pays de la Loire","Sarthe":"Pays de la Loire",
+  "Charente-Maritime":"Poitou-Charentes","Charente":"Poitou-Charentes","Deux-Sèvres":"Poitou-Charentes","Vienne":"Poitou-Charentes",
+  "Hérault":"Languedoc-Roussillon","Gard":"Languedoc-Roussillon","Pyrénées-Orientales":"Languedoc-Roussillon","Aude":"Languedoc-Roussillon","Lozère":"Languedoc-Roussillon",
+  "Bouches-du-Rhône":"PACA","Var":"PACA","Alpes-Maritimes":"PACA","Vaucluse":"PACA","Alpes-de-Haute-Provence":"PACA","Hautes-Alpes":"PACA"
 };
 
-const COASTAL_DEPTS = new Set(["14","22","29","35","44","50","56","76","85","17","33","40","64","66","11","34","30","13","83","06","2A","2B","59","62","80"]);
+const COASTAL_REGIONS = new Set(["Alsace","Lorraine","Bretagne","Aquitaine","Nord-Pas-de-Calais","Haute-Normandie","Basse-Normandie","Pays de la Loire","Poitou-Charentes","Languedoc-Roussillon","PACA"]);
 
-let currentView = 'vigilance';
-let selectedLvl = 'vert';
-let selectedPicto = null;
-let currentRegLvl = 'vert';
-let currentRegPicto = null;
+let activeView = 'vigilance';
+let activeDay = 'today';
 
-let deptStates = {};    // { code: { lvl, picto } }
-let probStates = {};    // { code: lvl }
-let regionStates = {};  // { oldRegionName: lvl }
-let coastalPictos = {}; // { code: [pictos] }
+// États des données
+let activeLevel = 'vert';
+let activePicto = null;
+let mainData = { today: {}, tomorrow: {} };
 
-let geoFeatures = [];
-const W = 600, H = 600;
+// Mode probable
+let probViewMode = 'passage'; // 'passage' ou 'sans_passage'
+let probData = {};
 
-function switchView(view) {
-  currentView = view;
-  ['vigilance', 'probable', 'regions'].forEach(v => {
-    document.getElementById(`view-${v}`).style.display = (v === view) ? 'flex' : 'none';
-    document.getElementById(`tab-${v}`).classList.toggle('on', v === view);
+// Mode anciennes régions
+let regActiveLevel = 'vert';
+let regActivePictos = []; // Pictos côtiers multiples sélectionnés
+let regData = {}; // { RegionName: { level: 'vert', pictos: [] } }
+
+let svg, gMap, projection, pathGenerator, featuresData;
+
+function setView(view) {
+  activeView = view;
+  d3.selectAll('.vtab').classList?.remove('on');
+  d3.selectAll('.vtab').each(function() {
+    this.classList.toggle('on', this.id === `vtab-${view === 'regions' ? 'reg' : view === 'probable' ? 'prob' : 'vigil'}`);
   });
+  d3.select('#day-tabs-wrap').style('display', view === 'vigilance' ? 'flex' : 'none');
+  
+  buildSidebar();
+  redrawMap();
 }
 
-// Extraction des codes départementaux normalisés
-function getDeptCode(d) {
-  let c = d.properties.code || d.properties.CODE || d.properties.department || '';
-  if(!c && d.properties.name) {
-    const m = d.properties.name.match(/^\d+/);
-    if(m) c = m[0];
+function setDay(day) {
+  activeDay = day;
+  d3.selectAll('.day-tabs .dtab').each(function() { this.classList.toggle('on', this.id === `dtab-${day}`); });
+  redrawMap();
+}
+
+function buildSidebar() {
+  const sb = d3.select('#sidebar-controls');
+  sb.html('');
+
+  if (activeView === 'vigilance') {
+    let cardLvl = sb.append('div').attr('class', 'card');
+    cardLvl.append('p').attr('class', 'stitle').text("Niveau d'alerte");
+    Object.keys(LEVELS).forEach(k => {
+      let b = cardLvl.append('button').attr('class', 'lvl-btn' + (activeLevel === k ? ' on' : ''));
+      b.html(`<span class="lvl-dot" style="background:${LEVELS[k].color}"></span>${LEVELS[k].label}`);
+      b.on('click', () => {
+        activeLevel = k;
+        cardLvl.selectAll('.lvl-btn').classed('on', false);
+        b.classed('on', true);
+      });
+    });
+
+    let cardPicto = sb.append('div').attr('class', 'card');
+    cardPicto.append('p').attr('class', 'stitle').text("Phénomène");
+    let grid = cardPicto.append('div').attr('class', 'pgrid');
+    Object.keys(PICTOS).forEach(k => {
+      let pbtn = grid.append('button').attr('class', 'pbtn' + (activePicto === k ? ' on' : '')).attr('data-k', k);
+      pbtn.html(`<img src="${PICTOS[k]}"><span>${k.slice(0,5)}</span>`);
+      pbtn.on('click', () => {
+        activePicto = activePicto === k ? null : k;
+        grid.selectAll('.pbtn').classed('on', false);
+        if (activePicto) pbtn.classed('on', true);
+      });
+    });
+  } 
+  else if (activeView === 'probable') {
+    let cardMode = sb.append('div').attr('class', 'card');
+    cardMode.append('p').attr('class', 'stitle').text("Mode d'Évolution (Double carte)");
+    
+    let bPassage = cardMode.append('button').attr('class', 'lvl-btn' + (probViewMode === 'passage' ? ' on' : ''));
+    bPassage.html(`<span class="lvl-dot" style="background:#FFB82B"></span>Passage Vigilance Supérieure`);
+    bPassage.on('click', () => { probViewMode = 'passage'; cardMode.selectAll('.lvl-btn').classed('on', false); bPassage.classed('on', true); redrawMap(); });
+
+    let bSans = cardMode.append('button').attr('class', 'lvl-btn' + (probViewMode === 'sans_passage' ? ' on' : ''));
+    bSans.html(`<span class="lvl-dot" style="background:#31AA35"></span>Pas de passage (Reste stable)`);
+    bSans.on('click', () => { probViewMode = 'sans_passage'; cardMode.selectAll('.lvl-btn').classed('on', false); bSans.classed('on', true); redrawMap(); });
+  } 
+  else if (activeView === 'regions') {
+    let cardLvl = sb.append('div').attr('class', 'card');
+    cardLvl.append('p').attr('class', 'stitle').text("Intensité du Risque");
+    Object.keys(LEVELS).forEach(k => {
+      let b = cardLvl.append('button').attr('class', 'lvl-btn' + (regActiveLevel === k ? ' on' : ''));
+      b.html(`<span class="lvl-dot" style="background:${LEVELS[k].color}"></span>${LEVELS[k].label}`);
+      b.on('click', () => {
+        regActiveLevel = k;
+        cardLvl.selectAll('.lvl-btn').classed('on', false);
+        b.classed('on', true);
+      });
+    });
+
+    let cardPicto = sb.append('div').attr('class', 'card');
+    cardPicto.append('p').attr('class', 'stitle').text("Pictos Côtiers Cumulables");
+    let grid = cardPicto.append('div').attr('class', 'pgrid');
+    Object.keys(PICTOS).forEach(k => {
+      let pbtn = grid.append('button').attr('class', 'pbtn' + (regActivePictos.includes(k) ? ' on' : ''));
+      pbtn.html(`<img src="${PICTOS[k]}"><span>${k.slice(0,5)}</span>`);
+      pbtn.on('click', () => {
+        let idx = regActivePictos.indexOf(k);
+        if (idx > -1) regActivePictos.splice(idx, 1);
+        else regActivePictos.push(k);
+        pbtn.classed('on', regActivePictos.includes(k));
+      });
+    });
   }
-  return c.trim();
+
+  sb.append('button').attr('class', 'act-btn primary').style('margin-top', '6px').text('📸 Capturer & Télécharger PNG').on('click', exportToPNG);
 }
 
-async function init() {
-  // Chargement de la topologie simplifiée française
-  const res = await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements-version-simplifiee.geojson');
-  const geojson = await res.json();
-  geoFeatures = geojson.features;
+function redrawMap() {
+  if (!gMap) return;
 
-  buildSidebars();
-  renderMap('map-dept-box', 'dept');
-  renderMap('map-prob-box', 'prob');
-  renderMap('map-regions-box', 'region');
-}
+  gMap.selectAll('path')
+    .attr('fill', d => {
+      const nm = d.properties.name || d.properties.NAME || '';
+      const reg = DEPT_TO_OLD_REG[nm] || 'Autre';
 
-function buildSidebars() {
-  const containers = ['lvl-container', 'prob-lvl-container', 'reg-lvl-container'];
-  containers.forEach(id => {
-    const div = document.getElementById(id);
-    Object.entries(LEVELS).forEach(([k, v]) => {
-      const b = document.createElement('button');
-      b.className = 'lvl-btn';
-      b.innerHTML = `<span class="lvl-dot" style="background:${v.color}"></span>${v.label}`;
-      b.onclick = () => {
-        if(id.startsWith('prob')) selectedLvl = k;
-        else if(id.startsWith('reg')) currentRegLvl = k;
-        else selectedLvl = k;
-        div.querySelectorAll('button').forEach(btn => btn.classList.remove('on'));
-        b.classList.add('on');
-      };
-      div.appendChild(b);
+      if (activeView === 'vigilance') {
+        let dd = mainData[activeDay][nm];
+        return dd ? LEVELS[dd.level].color : '#1e2535';
+      } 
+      else if (activeView === 'probable') {
+        let pb = probData[nm];
+        if (pb === probViewMode) {
+          return probViewMode === 'passage' ? '#FFB82B' : '#31AA35';
+        }
+        return '#1e2535';
+      } 
+      else if (activeView === 'regions') {
+        let rd = regData[reg];
+        if (!rd) return '#1e2535';
+        // Plus le risque est élevé, plus la couleur est sombre/foncée
+        let base = d3.color(LEVELS[rd.level].color);
+        return rd.level === 'vert' ? base : base.darker(1.5);
+      }
+      return '#1e2535';
     });
-    div.querySelector('button').classList.add('on');
-  });
 
-  // Grilles de Phénomènes
-  ['pgrid-dept', 'pgrid-coastal'].forEach(id => {
-    const grid = document.getElementById(id);
-    Object.entries(PICTOS).forEach(([k, url]) => {
-      const b = document.createElement('button');
-      b.className = 'pbtn';
-      b.innerHTML = `<img src="${url}"><span>${k}</span>`;
-      b.onclick = () => {
-        if(id.includes('coastal')) currentRegPicto = currentRegPicto === k ? null : k;
-        else selectedPicto = selectedPicto === k ? null : k;
-        grid.querySelectorAll('.pbtn').forEach(btn => btn.classList.remove('on'));
-        if(selectedPicto === k || currentRegPicto === k) b.classList.add('on');
-      };
-      grid.appendChild(b);
-    });
-  });
-}
+  // Mise à jour des pictos sur la carte
+  gMap.selectAll('.map-picto').remove();
 
-function renderMap(containerId, type) {
-  const box = document.getElementById(containerId);
-  const projection = d3.geoConicConformal().center([2.45, 46.28]).scale(2600).translate([W/2, H/2]);
-  const pathGen = d3.geoPath().projection(projection);
+  featuresData.forEach(d => {
+    const nm = d.properties.name || d.properties.NAME || '';
+    const reg = DEPT_TO_OLD_REG[nm] || 'Autre';
+    const cent = pathGenerator.centroid(d);
+    if (!cent || isNaN(cent[0])) return;
 
-  const svg = d3.select(box).append('svg').attr('viewBox', `0 0 ${W} ${H}`);
-  const g = svg.append('g');
-
-  g.selectAll('path')
-    .data(geoFeatures)
-    .enter()
-    .append('path')
-    .attr('d', pathGen)
-    .attr('fill', '#1e2535')
-    .attr('stroke', 'rgba(255,255,255,0.15)')
-    .attr('stroke-width', 1)
-    .style('cursor', 'pointer')
-    .on('mouseenter', function(e, d) {
-      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1.5);
-      showTooltip(e, d, box, type);
-    })
-    .on('mouseleave', function() {
-      d3.select(this).attr('stroke', 'rgba(255,255,255,0.15)').attr('stroke-width', 1);
-      document.getElementById('tip-dept').style.display = 'none';
-      document.getElementById('tip-prob').style.display = 'none';
-      document.getElementById('tip-regions').style.display = 'none';
-    })
-    .on('click', function(e, d) {
-      const code = getDeptCode(d);
-      const reg = DEPT_TO_OLD_REG[code] || 'Inconnue';
-
-      if (type === 'dept') {
-        deptStates[code] = { lvl: selectedLvl, picto: selectedPicto };
-      } else if (type === 'prob') {
-        probStates[code] = selectedLvl;
-      } else if (type === 'region') {
-        regionStates[reg] = currentRegLvl;
-        if(COASTAL_DEPTS.has(code) && currentRegPicto) {
-          if(!coastalPictos[code]) coastalPictos[code] = [];
-          if(!coastalPictos[code].includes(currentRegPicto)) coastalPictos[code].push(currentRegPicto);
-          else coastalPictos[code] = coastalPictos[code].filter(p => p !== currentRegPicto);
+    if (activeView === 'vigilance') {
+      let dd = mainData[activeDay][nm];
+      if (dd && dd.picto) {
+        gMap.append('image').attr('class', 'map-picto')
+          .attr('href', PICTOS[dd.picto])
+          .attr('x', cent[0] - 10).attr('y', cent[1] - 10)
+          .attr('width', 20).attr('height', 20);
+      }
+    } 
+    else if (activeView === 'regions' && COASTAL_REGIONS.has(reg)) {
+      let rd = regData[reg];
+      if (rd && rd.pictos && rd.pictos.length > 0) {
+        // Pour éviter de dupliquer l'icône sur tous les départements d'une même ancienne région côtière,
+        // on ne l'affiche que sur le département côtier référencé dans notre dictionnaire.
+        if (DEPT_TO_OLD_REG[nm] === reg && ["Bas-Rhin","Finistère","Gironde","Nord","Seine-Maritime","Calvados","Loire-Atlantique","Charente-Maritime","Hérault","Bouches-du-Rhône"].includes(nm)) {
+          rd.pictos.forEach((p, i) => {
+            gMap.append('image').attr('class', 'map-picto')
+              .attr('href', PICTOS[p])
+              .attr('x', cent[0] - 10 + (i * 15) - ((rd.pictos.length * 15)/4))
+              .attr('y', cent[1] - 10)
+              .attr('width', 20).attr('height', 20);
+          });
         }
       }
-      refreshMaps(pathGen);
-    });
-}
-
-function refreshMaps(pathGen) {
-  // 1. Refresh Dept
-  d3.selectAll('#map-dept-box path').attr('fill', d => {
-    const code = getDeptCode(d);
-    return deptStates[code] ? LEVELS[deptStates[code].lvl].color : '#1e2535';
-  });
-  drawIcons('#map-dept-box', pathGen, d => {
-    const s = deptStates[getDeptCode(d)];
-    return s && s.picto ? [s.picto] : [];
-  });
-
-  // 2. Refresh Probable (Statique)
-  d3.selectAll('#map-prob-box path').attr('fill', d => {
-    const code = getDeptCode(d);
-    return probStates[code] ? LEVELS[probStates[code]].color : '#252a36';
-  });
-
-  // 3. Refresh Anciennes Régions (Teintes foncées progressives)
-  d3.selectAll('#map-regions-box path').attr('fill', d => {
-    const code = getDeptCode(d);
-    const reg = DEPT_TO_OLD_REG[code];
-    const lvl = regionStates[reg];
-    if(!lvl) return '#1e2535';
-    // Assombrissement progressif basé sur l'échelle de vigilance
-    const baseColor = d3.color(LEVELS[lvl].color);
-    return lvl === 'vert' ? baseColor : baseColor.darker(1.2);
-  });
-
-  // Multi-pictos sur les côtes
-  drawIcons('#map-regions-box', pathGen, d => {
-    const code = getDeptCode(d);
-    return coastalPictos[code] || [];
+    }
   });
 }
 
-function drawIcons(boxId, pathGen, pictoAccessor) {
-  const svg = d3.select(boxId).select('svg');
-  svg.selectAll('.map-ico-group').remove();
-
-  geoFeatures.forEach(d => {
-    const pics = pictoAccessor(d);
-    if(!pics || !pics.length) return;
-
-    const cent = pathGen.centroid(d);
-    if(!cent || isNaN(cent[0])) return;
-
-    const g = svg.append('g').attr('class', 'map-ico-group');
-    pics.forEach((p, idx) => {
-      g.append('image')
-       .attr('href', PICTOS[p])
-       .attr('x', cent[0] - 10 + (idx * 12)) // décalage horizontal si plusieurs pictos
-       .attr('y', cent[1] - 10)
-       .attr('width', 20)
-       .attr('height', 20);
-    });
-  });
-}
-
-function showTooltip(e, d, box, type) {
-  const code = getDeptCode(d);
-  const name = d.properties.name || 'Département';
-  const reg = DEPT_TO_OLD_REG[code] || 'Région non répertoriée';
-  const tip = document.getElementById(`tip-${type}`);
-  
-  tip.style.display = 'block';
-  const r = box.getBoundingClientRect();
-  tip.style.left = (e.clientX - r.left + 12) + 'px';
-  tip.style.top = (e.clientY - r.top - 30) + 'px';
-
-  if(type === 'region') {
-    tip.innerHTML = `<strong>Ancienne Région : ${reg}</strong><br>Département : ${name} (${code})`;
-  } else {
-    tip.innerHTML = `<strong>${name} (${code})</strong>`;
-  }
-}
-
-// TRANSFORMATION ET EXPORT PNG COMPLET
-function exportToPNG(boxId, filename) {
-  const svgEl = document.getElementById(boxId).querySelector('svg');
+function exportToPNG() {
+  const svgEl = document.querySelector('#map svg');
   const svgString = new XMLSerializer().serializeToString(svgEl);
-  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-  const URL = window.URL || window.webkitURL || window;
+  const svgBlob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
   const blobURL = URL.createObjectURL(svgBlob);
   
   const image = new Image();
   image.onload = () => {
     const canvas = document.createElement('canvas');
-    canvas.width = W * 2; // Qualité HD multipliée par 2
-    canvas.height = H * 2;
-    const context = canvas.getContext('2d');
-    context.fillStyle = '#1a1d27';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.width = 600; canvas.height = 624;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#131823';
+    ctx.fillRect(0, 0, 600, 624);
+    ctx.drawImage(image, 0, 0, 600, 624);
     
     const png = canvas.toDataURL('image/png');
+    
+    // Téléchargement automatique
     const a = document.createElement('a');
-    a.download = filename;
+    a.download = `carte-${activeView}-${Date.now()}.png`;
     a.href = png;
     a.click();
 
-    // Insertion automatique dans la Galerie
-    addToGallery(png);
+    // Ajout automatique à la galerie des miniatures de cartes générées
+    addMiniature(png, `Saisie ${activeView}`);
   };
   image.src = blobURL;
 }
 
-function addToGallery(imgData) {
-  const gal = document.getElementById('gallery');
-  const wrap = document.createElement('div');
-  wrap.className = 'gallery-item';
-  wrap.innerHTML = `<img src="${imgData}">`;
-  gal.prepend(wrap);
+function importCustomMap(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    addMiniature(evt.target.result, "Import utilisateur");
+  };
+  reader.readAsDataURL(file);
 }
 
-function handleUpload(input) {
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) { addToGallery(e.target.result); };
-    reader.readAsDataURL(input.files[0]);
-  }
+function addMiniature(src, label) {
+  const grid = d3.select('#risk-gallery');
+  let item = grid.append('div').attr('class', 'gallery-item');
+  item.html(`
+    <img src="${src}">
+    <span>${label}</span>
+    <button style="background:transparent;border:none;color:var(--t3);font-size:10px;cursor:pointer;margin-top:2px" onclick="this.parentElement.remove()">Supprimer</button>
+  `);
 }
 
-window.onload = init;
+// Initialisation de la carte d'origine (Stable, Fixe, et parfaitement cadrée)
+(async () => {
+  const topo = await d3.json('https://cdn.jsdelivr.net/npm/datamaps@0.5.10/src/js/data/fra.topo.json');
+  const key = Object.keys(topo.objects)[0];
+  featuresData = topojson.feature(topo, topo.objects[key]).features;
+
+  const width = 600, height = 624;
+  projection = d3.geoConicConformal().parallels([44,49]).rotate([-3,0]).center([0,46.5]).scale(1860).translate([width/2, height/2]);
+  pathGenerator = d3.geoPath().projection(projection);
+
+  svg = d3.select('#map').append('svg').attr('viewBox', `0 0 ${width} ${height}`).style('width','100%').style('height','100%');
+  gMap = svg.append('g');
+
+  gMap.selectAll('path')
+    .data(featuresData)
+    .join('path')
+    .attr('d', pathGenerator)
+    .attr('fill', '#1e2535')
+    .attr('stroke', 'rgba(255,255,255,.14)')
+    .style('cursor', 'pointer')
+    .on('mouseenter', function(event, d) {
+      const nm = d.properties.name || d.properties.NAME || '';
+      const reg = DEPT_TO_OLD_REG[nm] || 'Autre';
+      d3.select('#tip').style('display', 'block')
+        .style('left', (event.offsetX + 10) + 'px')
+        .style('top', (event.offsetY + 10) + 'px')
+        .html(activeView === 'regions' ? `Ancienne Région: <b>${reg}</b><br>Dép: ${nm}` : `Département: <b>${nm}</b>`);
+    })
+    .on('mouseleave', () => d3.select('#tip').style('display', 'none'))
+    .on('click', function(event, d) {
+      const nm = d.properties.name || d.properties.NAME || '';
+      const reg = DEPT_TO_OLD_REG[nm] || 'Autre';
+
+      if (activeView === 'vigilance') {
+        let dd = mainData[activeDay][nm];
+        if (dd && dd.level === activeLevel && dd.picto === activePicto) delete mainData[activeDay][nm];
+        else mainData[activeDay][nm] = { level: activeLevel, picto: activePicto };
+      } 
+      else if (activeView === 'probable') {
+        if (probData[nm] === probViewMode) delete probData[nm];
+        else probData[nm] = probViewMode;
+      } 
+      else if (activeView === 'regions') {
+        if (!regData[reg]) regData[reg] = { level: 'vert', pictos: [] };
+        regData[reg].level = regActiveLevel;
+        regData[reg].pictos = [...regActivePictos];
+      }
+      redrawMap();
+    });
+
+  buildSidebar();
+  redrawMap();
+})();
 </script>
 </body>
 </html>
